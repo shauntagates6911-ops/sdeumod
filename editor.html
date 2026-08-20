@@ -1,0 +1,110 @@
+<div id="menubar">
+  <div class="menu-button" data-menu="fileMenu">File ▼</div>
+  <div class="menu-button" data-menu="editMenu">Edit ▼</div>
+  <div class="menu-button" data-menu="modMenu">Settings ▼</div>
+
+  <!-- FILE MENU -->
+  <div id="fileMenu" class="dropdown">
+    <div class="item" onclick="newProject()">New Project</div>
+    <div class="item" onclick="saveProject()">Save</div>
+    <div class="item" onclick="loadProject()">Load</div>
+  </div>
+
+  <!-- EDIT MENU -->
+  <div id="editMenu" class="dropdown">
+    <div class="item" onclick="undo()">Undo</div>
+    <div class="item" onclick="redo()">Redo</div>
+  </div>
+
+  <!-- SETTINGS MENU -->
+  <div id="modMenu" class="dropdown">
+    <div class="item" onclick="openModSettings()">Opened Settings</div>
+    <div class="item" onclick="toggleChaosMode()">Turbo Mode</div>
+    <div class="item" onclick="aboutMod()">About This Mod</div>
+    <div class="item" onclick="addons()">Addons</div>
+  </div>
+</div>
+#menubar {
+  background: #1e1e1e;
+  color: white;
+  padding: 6px 10px;
+  display: flex;
+  gap: 20px;
+  font-family: sans-serif;
+  position: relative;
+  user-select: none;
+}
+
+.menu-button {
+  cursor: pointer;
+  padding: 4px 6px;
+}
+
+.menu-button:hover {
+  background: #333;
+  border-radius: 4px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 32px;
+  background: #2b2b2b;
+  border: 1px solid #444;
+  padding: 5px 0;
+  width: 160px;
+  display: none;
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.dropdown.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown .item {
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.dropdown .item:hover {
+  background: #444;
+}
+const buttons = document.querySelectorAll('.menu-button');
+const menus = document.querySelectorAll('.dropdown');
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const id = btn.dataset.menu;
+    const menu = document.getElementById(id);
+
+    // Close all other menus
+    menus.forEach(m => {
+      if (m !== menu) m.classList.remove('show');
+    });
+
+    // Toggle this one
+    menu.classList.toggle('show');
+    e.stopPropagation();
+  });
+});
+
+// Close menus when clicking outside
+document.addEventListener('click', () => {
+  menus.forEach(m => m.classList.remove('show'));
+});
+
+// Example mod functions
+function newProject() { console.log("New project"); }
+function saveProject() { console.log("Save project"); }
+function loadProject() { console.log("Load project"); }
+
+function undo() { console.log("Undo"); }
+function redo() { console.log("Redo"); }
+
+function openModSettings() { console.log("Open mod settings"); }
+function toggleChaosMode() { console.log("TURBO MODE ACTIVATED"); }
+function aboutMod() { alert("This mod was built by SHAUNTE"); }
+function addons() { alert("Addons are visual plugins for your projects designed to make your shared project amazing."); }
