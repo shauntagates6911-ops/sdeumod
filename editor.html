@@ -24,39 +24,3 @@
     <div class="item" onclick="addons()">Addons</div>
   </div>
 </div>
-const buttons = document.querySelectorAll('.menu-button');
-const menus = document.querySelectorAll('.dropdown');
-
-buttons.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    const id = btn.dataset.menu;
-    const menu = document.getElementById(id);
-
-    // Close all other menus
-    menus.forEach(m => {
-      if (m !== menu) m.classList.remove('show');
-    });
-
-    // Toggle this one
-    menu.classList.toggle('show');
-    e.stopPropagation();
-  });
-});
-
-// Close menus when clicking outside
-document.addEventListener('click', () => {
-  menus.forEach(m => m.classList.remove('show'));
-});
-
-// Example mod functions
-function newProject() { console.log("New project"); }
-function saveProject() { console.log("Save project"); }
-function loadProject() { console.log("Load project"); }
-
-function undo() { console.log("Undo"); }
-function redo() { console.log("Redo"); }
-
-function openModSettings() { console.log("Open mod settings"); }
-function toggleChaosMode() { console.log("TURBO MODE ACTIVATED"); }
-function aboutMod() { alert("This mod was built by SHAUNTE"); }
-function addons() { alert("Addons are visual plugins for your projects designed to make your shared project amazing."); }
